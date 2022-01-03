@@ -1,0 +1,28 @@
+version: "3"
+
+services:
+
+  gldemo_x11:
+    build: .
+    environment:
+      - DISPLAY=${DISPLAY}
+    network_mode: "host"
+    volumes:
+      - /tmp/.X11-unix:/tmp/.X11-unix
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+    user: "${UID}:${GID}"
+    devices:
+      - /dev/dri
+
+  gldemo_wayland:
+    build: .
+    environment:
+      - XDG_RUNTIME_DIR=/tmp
+      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
+    network_mode: "host"
+    volumes:
+      - $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY
+      - $HOME/.Xauthority:/root/.Xauthority:rw
+    user: "${UID}:${GID}"
+    devices:
+      - /dev/dri
