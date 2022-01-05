@@ -22,12 +22,10 @@ This will prompt you to accept the license. Optional: use the `UNITY_URL` build 
 
 **Generate ALF:** `./shell.sh unity-editor/install/Editor/Unity -batchmode -nographics -createManualActivationFile -username USERNAME -password PASSWORD`
 
-Replace `USERNAME` and `PASSWORD` with your Unity3D credentials. The command should create an `.alf` file. 
+Replace `USERNAME` and `PASSWORD` with your Unity3D credentials. The command should create an `Unity_v2021.2.7f1.alf` file. 
 
-**Request ULF:** Upload this file to https://license.unity3d.com/manual . This should give you an `.ulf` file. Place it next to the ALF file.
+**Request ULF:** Upload this file to https://license.unity3d.com/manual . This should give you an `Unity_v2021.x.ulf` file. Place it next to the ALF file.
 
 ## Run Unity3D
 
-`./shell.sh bash -c "unity-editor/install/Editor/Unity -batchmode -manualLicenseFile ULFFILENAME ; unity-editor/install/Editor/Unity"`
-
-Replace `ULFFILENAME` with the name of the ULF file.
+`./shell.sh bash -c "unity-editor/install/Editor/Unity -batchmode -manualLicenseFile Unity_v2021.x.ulf ; unity-editor/install/Editor/Unity"`
