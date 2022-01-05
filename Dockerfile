@@ -4,9 +4,8 @@ ENV DEBIAN_FRONTEND=noninteractive TZ=Europe/Berlin
 
 RUN apt-get update && \
     apt-get -y install --no-install-recommends \
-    bash wget ca-certificates fuse xorg mesa-utils libnss3 libasound2 curl libarchive-tools
-    # libnss && \
-    # rm -rf /var/lib/apt/lists/*
+    bash wget ca-certificates fuse xorg mesa-utils libnss3 libasound2 curl libarchive-tools && \
+    rm -rf /var/lib/apt/lists/*
 
 SHELL ["/bin/bash", "-c"]
 
@@ -21,14 +20,9 @@ RUN groupadd -g "${UID}" contuser && \
 USER contuser
 
 WORKDIR /home/contuser/unity
-RUN wget https://download.unity3d.com/download_unity/6bd9e232123f/UnitySetup-2021.2.7f1 && \
+ARG UNITY_URL=https://download.unity3d.com/download_unity/6bd9e232123f/UnitySetup-2021.2.7f1
+RUN wget "${UNITY_URL}" && \
     mv UnitySetup-2021.2.7f1 UnitySetup && \
     chmod a+x UnitySetup
 
-# USER root
-# RUN apt-get -y install --no-install-recommends \
-    
-
-
-# USER contuser
-# CMD [ "glxinfo -B && glxgears" ]
+WORKDIR /home/contuser/data
