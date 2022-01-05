@@ -1,19 +1,19 @@
 # docker-gldemo
-Expose GUI applications from a Docker container
+Expose GUI applications from a Docker container, specifically Unity3D
 
 
 ## Dependencies 
 
 Install Docker and Docker Compose.
 
-## Build the image
+## Usage
 
-Build the image: 
+**Build the image:** `./build.sh`.
 
-`docker-compose build gldemo_x11` or `docker-compose build gldemo_wayland`.
+**Run a shell in the container:** `./start.sh`
 
-## Run the image
+You can use this to run `glxgears` for example.
 
-`./start.sh gldemo_x11` or `./start.sh gldemo_wayland` (untested).
+**Run the Unity3D installer:** `./install.sh`
 
-If everything works, a windows displaying three turning gears should pop up, and the console should print information about your (integrated) GPU.
+This will prompt you to accept the license.

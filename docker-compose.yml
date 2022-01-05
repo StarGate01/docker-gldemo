@@ -2,27 +2,26 @@ version: "3"
 
 services:
 
-  gldemo_x11:
-    build: .
+  gldemo:
+    build: 
+      context: .
+      args:
+        - GID=${MYGID}
+        - UID=${MYUID}
     environment:
       - DISPLAY=${DISPLAY}
+      - XAUTHORITY=/tmp/.docker.xauth
     network_mode: "host"
     volumes:
+      - ./:/home/contuser/data:rw
       - /tmp/.X11-unix:/tmp/.X11-unix
+      - /tmp/.docker.xauth:/tmp/.docker.xauth
       - $HOME/.Xauthority:/root/.Xauthority:rw
-    user: "${UID}:${GID}"
+    user: "${MYUID}:${MYGID}"
     devices:
       - /dev/dri
-
-  gldemo_wayland:
-    build: .
-    environment:
-      - XDG_RUNTIME_DIR=/tmp
-      - WAYLAND_DISPLAY=${WAYLAND_DISPLAY}
-    network_mode: "host"
-    volumes:
-      - $XDG_RUNTIME_DIR/$WAYLAND_DISPLAY:/tmp/$WAYLAND_DISPLAY
-      - $HOME/.Xauthority:/root/.Xauthority:rw
-    user: "${UID}:${GID}"
-    devices:
-      - /dev/dri
+      - /dev/fuse
+    cap_add:
+      - SYS_ADMIN
+    security_opt: 
+      - "apparmor:unconfined"
